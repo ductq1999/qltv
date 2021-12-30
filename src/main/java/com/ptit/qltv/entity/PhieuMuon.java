@@ -1,8 +1,8 @@
 package com.ptit.qltv.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.Instant;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "phieu_muon")
 public class PhieuMuon {
 
@@ -33,6 +33,9 @@ public class PhieuMuon {
 
     @Column(name = "han_tra", nullable = false)
     private Instant hanTra;
+
+    @Column(name = "ngay_tra")
+    private Instant ngayTra;
 
     @Column(name = "trang_thai", nullable = false)
     private boolean trangThai;

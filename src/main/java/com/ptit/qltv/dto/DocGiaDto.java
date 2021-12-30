@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DocGiaDto {
 
@@ -39,7 +39,7 @@ public class DocGiaDto {
     @JsonGetter("ngay_sinh")
     public Object getNgaySinh() {
         try {
-            return ngaySinh.getEpochSecond();
+            return Date.from(ngaySinh);
         } catch (Exception e) {
             return null;
         }

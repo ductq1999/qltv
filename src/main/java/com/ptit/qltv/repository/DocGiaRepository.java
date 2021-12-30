@@ -14,9 +14,11 @@ import java.time.Instant;
 public interface DocGiaRepository extends JpaRepository<DocGia, Integer> {
 
     @Query(value = "SELECT * FROM doc_gia d " +
-            "LEFT JOIN phieu_muon p ON p.doc_gia_id = d.id " +
-            "WHERE p.thoi_gian_muon BETWEEN :thoi_gian_muon_from " +
-            "AND :thoi_gian_muon_to ORDER BY d.so_sach_da_muon DESC", nativeQuery = true)
+            "INNER JOIN phieu_muon p ON p.doc_gia_id = d.id " +
+            "WHERE p.thoi_gian_muon > :thoi_gian_muon_from " +
+            "AND p.thoi_gian_muon < :thoi_gian_muon_to " +
+            "GROUP BY d.id, d.ma, d.ten, d.ngay_sinh, d.dia_chi, d.so_dien_thoai, d.ma_vach, d.so_sach_da_muon " +
+            "ORDER BY d.so_sach_da_muon DESC", nativeQuery = true)
     Page<DocGia> getListDocGia(@Param("thoi_gian_muon_from") Instant thoiGianMuonFrom,
                                @Param("thoi_gian_muon_to") Instant thoiGianMuonTo, Pageable pageable);
 
